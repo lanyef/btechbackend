@@ -8,7 +8,7 @@ from PIL import Image
 app = FastAPI()
 
 
-loaded_model = tf.keras.models.load_model("../models/3")
+loaded_model = tf.keras.models.load_model("./model")
 
 loaded_model.summary()
 
