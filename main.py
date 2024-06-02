@@ -12,9 +12,6 @@ loaded_model = tf.keras.models.load_model("./model")
 
 loaded_model.summary()
 
-# def read_file_as_image(data) -> np.ndarray:
-#     image = np.array(Image.open(BytesIO(data)))
-#     return image
 
 CLASS_NAMES = ['Tomato___Bacterial_spot',
  'Tomato___Early_blight',
@@ -26,6 +23,11 @@ CLASS_NAMES = ['Tomato___Bacterial_spot',
  'Tomato___Tomato_Yellow_Leaf_Curl_Virus',
  'Tomato___Tomato_mosaic_virus',
  'Tomato___healthy']
+
+
+@app.get("/")
+async def health():
+    return {"msg":"server is running, send a post request to /predict with a file to get a response"}
 
 def read_file_as_image(bytes):
     image = Image.open(BytesIO(bytes))
