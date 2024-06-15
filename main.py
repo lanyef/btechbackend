@@ -3,10 +3,11 @@ import tensorflow as tf
 import numpy as np
 import uvicorn
 from io import BytesIO
+from fastapi_cors import CORSProcessor
 from PIL import Image
 
 app = FastAPI()
-
+app.add_middleware(CORSProcessor, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 loaded_model = tf.keras.models.load_model("./model")
 
@@ -25,7 +26,7 @@ CLASS_NAMES = ['Tomato___Bacterial_spot',
  'Tomato___healthy']
 
 
-@app.get("/")
+@app.get("/ping")
 async def health():
     return {"msg":"server is running, send a post request to /predict with a file to get a response"}
 
