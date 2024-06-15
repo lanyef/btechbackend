@@ -3,11 +3,18 @@ import tensorflow as tf
 import numpy as np
 import uvicorn
 from io import BytesIO
-from fastapi_cors import CORSProcessor
+from starlette.middleware.cors import CORSMiddleware
 from PIL import Image
 
 app = FastAPI()
-app.add_middleware(CORSProcessor, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 loaded_model = tf.keras.models.load_model("./model")
 
